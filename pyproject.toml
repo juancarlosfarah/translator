@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "translation"
+version = "0.1.0"
+description = ""
+authors = ["Juan Carlos Farah <juancarlos.farah@epfl.ch>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+transformers = "^4.42.4"
+pandas = "^2.2.2"
+torch = "^2.3.1"
+torchvision = "^0.18.1"
+sentencepiece = "^0.2.0"
+protobuf = "^5.27.2"
+beautifulsoup4 = "^4.12.3"
+nltk = "^3.8.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

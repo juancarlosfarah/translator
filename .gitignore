@@ -1,0 +1,25 @@
+# local files
+*.local
+
+# editor directories and files
+.vscode
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# usual output or data folders
+dist/
+build/
+tmp/
+temp/
+out/
+release/
+results/*
+!results/README.md
+data.zip
+data/*
+!data/README.md
