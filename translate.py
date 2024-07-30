@@ -1,4 +1,5 @@
 import os
+import math
 import pandas as pd
 from transformers import pipeline
 import torch
@@ -63,7 +64,8 @@ def translate_text(text, translator, src_lang):
         sentences = sent_tokenize(cleaned_text)
 
         # create chunks of sentences
-        chunks = create_chunks(sentences, MAX_LENGTH)
+        soft_max_length = math.floor(0.9 * MAX_LENGTH)
+        chunks = create_chunks(sentences, soft_max_length)
 
         # translate each chunk
         translations = [translator(chunk, src_lang=src_lang, tgt_lang=TARGET_LANGUAGE)[0]['translation_text'] for chunk in tqdm(chunks, desc="translating chunks...")]
