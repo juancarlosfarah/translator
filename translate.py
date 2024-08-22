@@ -64,11 +64,11 @@ def translate_text(text, translator, src_lang):
         sentences = sent_tokenize(cleaned_text)
 
         # create chunks of sentences
-        soft_max_length = math.floor(0.9 * MAX_LENGTH)
-        chunks = create_chunks(sentences, soft_max_length)
+        # soft_max_length = math.floor(0.9 * MAX_LENGTH)
+        # chunks = create_chunks(sentences, soft_max_length)
 
         # translate each chunk
-        translations = [translator(chunk, src_lang=src_lang, tgt_lang=TARGET_LANGUAGE)[0]['translation_text'] for chunk in tqdm(chunks, desc="translating chunks...")]
+        translations = [translator(sentence, src_lang=src_lang, tgt_lang=TARGET_LANGUAGE)[0]['translation_text'] for sentence in tqdm(sentences, desc="translating sentences...")]
 
         # join translated chunk
         translated_text = ' '.join(translations)
@@ -97,12 +97,12 @@ def translate_csv_file(input_path, output_path, translator, src_lang):
         df.to_csv(output_path, sep='\t', index=False)
         return output_path
     except pd.errors.ParserError as e:
-        print(f"error parsing {filepath}: {e}")
+        print(f"error parsing {input_path}: {e}")
         return None
 
 
 def translate_all_csv_files(input_path, output_path, translator):
-    csv_files = [f for f in os.listdir(input_path) if f.endswith(".csv") and '_translated' not in f.split('.csv')[0]]
+    csv_files = [f for f in os.listdir(input_path) if f.endswith(".csv") and '_translated' not in f]
     for filename in tqdm(csv_files, desc="translating csv files"):
         src_lang = filename
         filepath = os.path.join(input_path, filename)
